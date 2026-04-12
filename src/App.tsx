@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Header} from "./site/Header";
 import {Body} from "./site/Body";
@@ -30,6 +30,17 @@ function App() {
         {id: uuidv4(), name: "Isabella Clark", age: 21, major: "Mathematics"}
 
     ]
+
+    let [a,setA]=useState(1)
+    const onClickHandler= ()=>{
+        setA(a+1);
+        console.log(a);
+    }
+
+    const onClickResetHandler=()=>{
+        setA(0);
+    }
+
     return (
         <div className="App">
             <Header title={"Header Title"}/>
@@ -37,6 +48,9 @@ function App() {
             <Footer titleForFooter={"Footer Title"}/>
             <NewComponent students={students}/>
             <ComponentCars />
+            <h1>{a}</h1>
+            <button onClick={onClickHandler}>number</button>
+            <button onClick={onClickResetHandler}>0</button>
         </div>
     );
 }
