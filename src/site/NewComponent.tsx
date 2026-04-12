@@ -1,5 +1,5 @@
 export type StudentType = {
-    id: number
+    id: string
     name: string
     age: number
     major: string
@@ -17,8 +17,8 @@ export const NewComponent = ({students}: NewComponentType) => {
                 return (
                     <li key={student.id}>
                         <span>{student.name} </span>
-                        <span>{student.age} </span>
-                        <span>{student.major} </span>
+                        <span>age: {student.age} </span>
+                        <span>major: {student.major} </span>
                     </li>
                 )
             })}
