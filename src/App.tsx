@@ -31,15 +31,16 @@ function App() {
 
     ]
 
-    let [a,setA]=useState(1)
-    const onClickHandler= ()=>{
+    let [a,setA]=useState(1);
+    const onClickHandler=()=>{
         setA(a+1);
         console.log(a);
     }
-
     const onClickResetHandler=()=>{
         setA(0);
+        console.log(a);
     }
+
 
     return (
         <div className="App">
@@ -48,8 +49,7 @@ function App() {
             <Footer titleForFooter={"Footer Title"}/>
             <NewComponent students={students}/>
             <ComponentCars />
-            <h1>{a}</h1>
-            <button onClick={onClickHandler}>number</button>
+            <button onClick={onClickHandler}>Button</button>
             <button onClick={onClickResetHandler}>0</button>
         </div>
     );
