@@ -6,6 +6,7 @@ import {Footer} from "./site/Footer";
 import {NewComponent, StudentType} from "./site/NewComponent";
 import {v4 as uuidv4} from 'uuid';
 import {ComponentCars} from "./site/ComponentCars";
+import {MoneyComponent} from "./site/MoneyComponent";
 
 export type MoneyType = {
     banknots: string
@@ -13,7 +14,7 @@ export type MoneyType = {
     number: string
 }
 
-export type filterType="All"|"RUBLS"|'Dollars'
+export type filterType = "All" | "RUBLS" | 'Dollars'
 
 function App() {
 
@@ -94,23 +95,9 @@ function App() {
             <ComponentCars/>
             <button onClick={onClickHandler}>Button</button>
             <button onClick={onClickResetHandler}>0</button>
-
-            <ul>
-                {currentMoneys.map((money, index) => {
-                    return (
-                        <li key={index}>
-                            <span> {money.banknots}</span>
-                            <span> {money.value}</span>
-                            <span> {money.number}</span>
-                        </li>
-                    )
-                })}
-            </ul>
-            <div>
-                <button onClick={() => onClickFilterHandler("All")}>All</button>
-                <button onClick={() => onClickFilterHandler("RUBLS")}>RUBLS</button>
-                <button onClick={() => onClickFilterHandler("Dollars")}>Dollars</button>
-            </div>
+            <MoneyComponent
+                currentMoneys={currentMoneys}
+                onClickFilterHandler={onClickFilterHandler}/>
         </div>
     );
 }
