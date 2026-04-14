@@ -7,6 +7,14 @@ import {NewComponent, StudentType} from "./site/NewComponent";
 import {v4 as uuidv4} from 'uuid';
 import {ComponentCars} from "./site/ComponentCars";
 
+export type MoneyType = {
+    banknots: string
+    value: number
+    number: string
+}
+
+export type filterType="All"|"RUBLS"|'Dollars'
+
 function App() {
 
     const students: StudentType[] = [
@@ -31,14 +39,49 @@ function App() {
 
     ]
 
-    let [a,setA]=useState(1);
-    const onClickHandler=()=>{
-        setA(a+1);
+    const [a, setA] = useState(1);
+    const onClickHandler = () => {
+        setA(a + 1);
         console.log(a);
     }
-    const onClickResetHandler=()=>{
+    const onClickResetHandler = () => {
         setA(0);
         console.log(a);
+    }
+
+    const [moneys, setMoneys] = useState<MoneyType[]>([
+        {banknots: 'Dollars', value: 100, number: ' a1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' z1234567890'},
+        {banknots: 'RUBLS', value: 100, number: ' w1234567890'},
+        {banknots: 'Dollars', value: 100, number: ' e1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' c1234567890'},
+        {banknots: 'RUBLS', value: 100, number: ' r1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' x1234567890'},
+        {banknots: 'RUBLS', value: 50, number: ' v1234567890'},
+    ])
+
+    // //currentMoneys это все деньги в массиве moneys
+    // let currentMoneys = moneys;
+    //
+    // //если currentMoneys==='RUBLS' то отрисуй только обьекты со свойством рубли
+    // currentMoneys = moneys.filter(m => m.banknots === 'RUBLS');
+    //
+    // //если currentMoneys==='Dollars' то отрисуй все обьекты со свойством доллары
+    // currentMoneys= moneys.filter(m=>m.banknots === 'Dollars');
+
+    const [nameButton, setNameButton] = useState<filterType>("All")
+
+    let currentMoneys = moneys
+    if (nameButton === 'RUBLS') {
+        currentMoneys = moneys.filter(m => m.banknots === 'RUBLS')
+    }
+
+    if (nameButton === 'Dollars') {
+        currentMoneys = moneys.filter(m => m.banknots === 'Dollars')
+    }
+
+    const onClickFilterHandler = (nameButton: filterType) => {
+        setNameButton(nameButton)
     }
 
 
@@ -48,9 +91,26 @@ function App() {
             <Body titleForBody={"Body Title"}/>
             <Footer titleForFooter={"Footer Title"}/>
             <NewComponent students={students}/>
-            <ComponentCars />
+            <ComponentCars/>
             <button onClick={onClickHandler}>Button</button>
             <button onClick={onClickResetHandler}>0</button>
+
+            <ul>
+                {currentMoneys.map((money, index) => {
+                    return (
+                        <li key={index}>
+                            <span> {money.banknots}</span>
+                            <span> {money.value}</span>
+                            <span> {money.number}</span>
+                        </li>
+                    )
+                })}
+            </ul>
+            <div>
+                <button onClick={() => onClickFilterHandler("All")}>All</button>
+                <button onClick={() => onClickFilterHandler("RUBLS")}>RUBLS</button>
+                <button onClick={() => onClickFilterHandler("Dollars")}>Dollars</button>
+            </div>
         </div>
     );
 }
