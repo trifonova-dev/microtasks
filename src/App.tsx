@@ -85,6 +85,24 @@ function App() {
         setNameButton(nameButton)
     }
 
+    // const myHelloButton = (event:React.MouseEvent<HTMLButtonElement>) => {
+    //     console.log("Nata")
+    // }
+    // const myDimaButton = (event:React.MouseEvent<HTMLButtonElement>) => {
+    //     console.log("Dima")
+    // }
+
+    const onClickHandlerNew = (name: string) => {
+        console.log(name)
+    }
+
+    const forOneButton = () => {
+        console.log(1)
+    }
+
+    const forTwoButton = (number:number) => {
+        console.log(number)
+    }
 
     return (
         <div className="App">
@@ -98,6 +116,25 @@ function App() {
             <MoneyComponent
                 currentMoneys={currentMoneys}
                 onClickFilterHandler={onClickFilterHandler}/>
+
+            <button
+                style={{margin: "20px"}}
+                onClick={() => onClickHandlerNew("D")}
+            >Dima
+            </button>
+            <button
+                style={{margin: "20px"}}
+                onClick={() => onClickHandlerNew("N")}
+            >Hello
+            </button>
+            <button style={{margin: "20px"}}
+                    onClick={forOneButton}
+            >1
+            </button>
+            <button style={{margin: "20px"}}
+                    onClick={()=>forTwoButton(2)}
+            >2
+            </button>
         </div>
     );
 }
