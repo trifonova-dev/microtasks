@@ -1,12 +1,16 @@
 export type ButtonType = {
     title: string
-    onClick?: () => void
+    callback: () => void
 }
 
-export const Button = ({title, onClick}: ButtonType) => {
+export const Button = ({title, callback}: ButtonType) => {
+    const onClickButtonHandler = () => {
+        callback();
+    }
     return (
-        <button onClick={onClick}>
+        <button onClick={onClickButtonHandler}>
             {title}
         </button>
     );
 };
+
